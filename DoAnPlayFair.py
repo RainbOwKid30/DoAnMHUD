@@ -5,8 +5,12 @@ def generate_playfair_matrix(key):
     key = "".join(dict.fromkeys(key.replace(" ", "")))
     alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
     matrix = []
+    # dòng for này có ý nghĩa là
+    # char có nằm trong phạm vi cái key hay ko nếu có thì sẽ vô trong làm tiếp 
+    # ko thì thoát dòng for
 
     for char in key:
+        # dòng if này thỏa khi char nó ko nằm trong ma trận đó thì nó sẽ đc thêm vào mà trận
         if char not in matrix:
             matrix.append(char)
 
@@ -18,7 +22,9 @@ def generate_playfair_matrix(key):
 
 def preprocess_plaintext(plaintext):
     plaintext = plaintext.replace(" ", "").replace("J", "I")
+    # dòng pair này dùng để chạy 1 lúc 1 cặp 
     pairs = [plaintext[i:i + 2] for i in range(0, len(plaintext), 2)]
+    # và nếu chiều dài của cặp đó = 1 thì nó sẽ thêm vào X
     for i in range(len(pairs)):
         if len(pairs[i]) == 1:
             pairs[i] += 'X'
@@ -30,6 +36,7 @@ def encrypt(plaintext, key):
     ciphertext = ""
 
     for pair in pairs:
+        # dùng để trả về số dòng số cột của 1 pair
         row1, col1 = divmod(matrix.index(pair[0]), 5)
         row2, col2 = divmod(matrix.index(pair[1]), 5)
 
