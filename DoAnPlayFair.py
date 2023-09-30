@@ -2,6 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 
 def generate_playfair_matrix(key):
+    # hàm join có ý nghĩa là nỗi chuỗi lại với nhau
+    # hàm fromkeys dùng để thêm vào cho nó theo cặp
+    # ví dụ: x = ('x','y','z')
+    # y = 0
+    # dùng fromkeys sẽ cho kết quả là {'x': 0, 'y': 0, 'z': 0}
+    # replace để xóa khoảng trống khi nối chuỗi tạo ra
+    # tóm lại dòng "key" sẽ cho ra 1 dãy chuỗi đã đc tối ưu 
     key = "".join(dict.fromkeys(key.replace(" ", "")))
     alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
     matrix = []
@@ -10,7 +17,7 @@ def generate_playfair_matrix(key):
     # ko thì thoát dòng for
 
     for char in key:
-        # dòng if này thỏa khi char nó ko nằm trong ma trận đó thì nó sẽ đc thêm vào mà trận
+        # dòng if này thỏa khi char nó ko nằm trong ma trận đó thì nó sẽ đc thêm vào ma trận
         if char not in matrix:
             matrix.append(char)
 
@@ -40,13 +47,13 @@ def encrypt(plaintext, key):
         row1, col1 = divmod(matrix.index(pair[0]), 5)
         row2, col2 = divmod(matrix.index(pair[1]), 5)
 
-        if row1 == row2:
+        if row1 == row2: # nếu cùng 1 dòng sẽ trả về bên phải
             ciphertext += matrix[row1 * 5 + (col1 + 1) % 5]
             ciphertext += matrix[row2 * 5 + (col2 + 1) % 5]
-        elif col1 == col2:
+        elif col1 == col2: # nếu cùng 1 cột sẽ trả về bên trái
             ciphertext += matrix[((row1 + 1) % 5) * 5 + col1]
             ciphertext += matrix[((row2 + 1) % 5) * 5 + col2]
-        else:
+        else: # cái này sẽ lấy điểm chung cắt nhau giữa 2 ký tự
             ciphertext += matrix[row1 * 5 + col2]
             ciphertext += matrix[row2 * 5 + col1]
 

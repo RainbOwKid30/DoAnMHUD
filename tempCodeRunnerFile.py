@@ -1,1 +1,2 @@
-d('a
+    keyPublic = random.randint()
+    print(keyPublic)

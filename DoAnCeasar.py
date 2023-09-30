@@ -9,13 +9,19 @@ def ceasar_cipher(text, shift, mode):
         if char.isalpha():
             is_upper = char.isupper()
             char = char.lower()
+            # cái mode này tức là để khi tui ấn nút encrypt(mã hóa)
+            #  thì nó sẽ vô nó tính toán dòng shifted
+            # ngược lại bấm decrypt(giải mã) sẽ tính toán dòng else
             if mode == "encrypt":
+                # ord trả về Unicode cho 1 ký tự
                 shifted = (ord(char) - ord('a') + shift) % 26
             else:
                 shifted = (ord(char) - ord('a') - shift) % 26
+                # chr biến số nguyên thành ký tự unicode tương đương với nó.
             shifted_char = chr(ord('a') + shifted)
             if is_upper:
                 shifted_char = shifted_char.upper()
+            # result : đây là cái chuỗi để lưu trữ
             result += shifted_char
         else:
             result += char
