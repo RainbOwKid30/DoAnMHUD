@@ -2,12 +2,15 @@ import random
 import tkinter as tk
 
 class BangMaChuDon:
+    # khởi tạo giá trị 
     def __init__(self, key):
         self.key = key
         self.alphabet = 'abcdefghijklmnopqrstuvwxyz'
-
+    # hàm mã hóa
     def encrypt(self, plaintext):
+        # plaintext này dùng để lưu chuỗi nhập vào và cho tất cả thành viết thường
         plaintext = plaintext.lower()
+        # tạo 1 list rỗng
         ciphertext = ''
         for char in plaintext:
             if char in self.alphabet:
